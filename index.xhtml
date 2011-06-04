@@ -4,18 +4,45 @@
     <title> CoffeeScript </title>
     <script src="helpers.js"/>
     <script src="coffee-script.js"/>
-    <style>
+    <style>	
       coffeescript { display: none;}
+      textarea, pre { width: 400px; height: 200px; position: absolute; top: 20px;}
+      textarea {color: transparent; }
+      pre { color: green; }
+      
     </style>
 
   </head>
 
   <body>
-  
-   <coffeescript><![CDATA[
-    
 
-]]></coffeescript>
+    <coffeescript><![CDATA[
+
+      hilit = ( code ) -> 
+        tokens = '{}[]()->.'.split('')
+        code.split(/(\s+)/).map( (i) -> if tokens.includes(i) then Node('b', {},[i]) else TextNode(i) )
+
+      colorlayer = Node 'pre', {}
+
+      toplayer = Node 'textarea', {spellcheck: 'false'}, ['Sample text']
+      toplayer.oninput = () -> 
+        colorlayer.innerHTML = ''
+        hilit(toplayer.value).forEach (i) -> colorlayer.append(i)
+      
+
+
+      
+
+      document.body.append( toplayer)
+      document.body.append( colorlayer )
+      toplayer.focus()
+      window.toplayer = toplayer
+      window.hilit = hilit
+
+      
+  
+
+ ]]></coffeescript>
 
    <script><![CDATA[
     document.getElementsByTagName("coffeescript").forEach( function(i) { CoffeeScript.eval(i.textContent);} )
