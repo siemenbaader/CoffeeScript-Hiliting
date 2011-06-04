@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title> CoffeeScript </title>
+    <script src="helpers.js"/>
+    <script src="coffee-script.js"/>
+    <style>
+      coffeescript { display: none;}
+    </style>
+
+  </head>
+
+  <body>
+  
+   <coffeescript><![CDATA[
+    
+
+]]></coffeescript>
+
+   <script><![CDATA[
+    document.getElementsByTagName("coffeescript").forEach( function(i) { CoffeeScript.eval(i.textContent);} )
+]]></script>
+
+
+  </body>
+</html>
