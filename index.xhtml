@@ -12,32 +12,32 @@
       
     </style>
 
+
+      <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+      <script type="text/javascript" src="syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+      <link type="text/css" rel="stylesheet" href="syntaxhighlighter_3.0.83/styles/shCoreMidnight.css"/>
   </head>
 
   <body>
 
     <coffeescript><![CDATA[
 
-      hilit = ( code ) -> 
-        tokens = '{}[]()->.'.split('')
-        code.split(/(\s+)/).map( (i) -> if tokens.includes(i) then Node('b', {},[i]) else TextNode(i) )
+      b = new SyntaxHighlighter.brushes.JScript()
+      b.init( { toolbar: false})
 
       colorlayer = Node 'pre', {}
 
       toplayer = Node 'textarea', {spellcheck: 'false'}, ['Sample text']
+
       toplayer.oninput = () -> 
-        colorlayer.innerHTML = ''
-        hilit(toplayer.value).forEach (i) -> colorlayer.append(i)
-      
+        html = b.getHtml( toplayer.value ).replace(/&nbsp;/g, "&#160;")
+        colorlayer.innerHTML = html
 
-
-      
 
       document.body.append( toplayer)
       document.body.append( colorlayer )
       toplayer.focus()
       window.toplayer = toplayer
-      window.hilit = hilit
 
       
   
